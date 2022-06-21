@@ -1,10 +1,10 @@
 radio.onReceivedString(function (receivedString) {
     basic.showString(receivedString)
-    if (receivedString == "F") {
+    if (receivedString == "^") {
         motor.MotorRun(motor.Motors.M1, motor.Dir.CCW, 130)
         motor.MotorRun(motor.Motors.M2, motor.Dir.CW, 130)
     }
-    if (receivedString == "B") {
+    if (receivedString == "v") {
         motor.MotorRun(motor.Motors.M1, motor.Dir.CW, 130)
         motor.MotorRun(motor.Motors.M2, motor.Dir.CCW, 130)
     }
@@ -12,11 +12,15 @@ radio.onReceivedString(function (receivedString) {
 radio.setGroup(168)
 basic.forever(function () {
     if (input.buttonIsPressed(Button.A)) {
-        radio.sendString("F")
-        basic.showIcon(IconNames.Yes)
+        radio.sendString("^")
+        basic.showString("^")
+        motor.MotorRun(motor.Motors.M1, motor.Dir.CCW, 130)
+        motor.MotorRun(motor.Motors.M2, motor.Dir.CW, 130)
     }
     if (input.buttonIsPressed(Button.B)) {
-        radio.sendString("B")
-        basic.showIcon(IconNames.No)
+        radio.sendString("v")
+        basic.showString("v")
+        motor.MotorRun(motor.Motors.M1, motor.Dir.CW, 130)
+        motor.MotorRun(motor.Motors.M2, motor.Dir.CCW, 130)
     }
 })
